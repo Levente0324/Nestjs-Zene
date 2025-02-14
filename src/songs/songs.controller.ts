@@ -1,9 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiParam,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('songs')
+@ApiBearerAuth()
 export class SongsController {
   constructor(private readonly songsService: SongsService) {}
 
@@ -42,5 +58,4 @@ export class SongsController {
   remove(@Param('id') id: string) {
     return this.songsService.remove(+id);
   }
-
 }
